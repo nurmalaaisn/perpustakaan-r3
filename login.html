@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Perpustakaan Digital</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #F2619C 0%, #E7BEF8 40%, #93ABD9 75%, #EDE986 100%);
+      background-size: 300% 300%;
+      animation: gradientMove 12s ease infinite;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0.5;
+    }
+    .blob1 {
+      width: 220px; height: 220px;
+      background: #EDE986;
+      top: -60px; left: -60px;
+      animation: float 8s ease-in-out infinite;
+    }
+    .blob2 {
+      width: 160px; height: 160px;
+      background: #F2619C;
+      bottom: -40px; right: -40px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    .blob3 {
+      width: 120px; height: 120px;
+      background: #93ABD9;
+      top: 20%; right: 8%;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-25px) scale(1.08); }
+    }
+
+    .login-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      width: 320px;
+      border: 1px solid rgba(255,255,255,0.6);
+      animation: popIn 0.6s ease;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .login-box .icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #F2619C, #E7BEF8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(242, 97, 156, 0.4);
+    }
+
+    .login-box h1 {
+      font-size: 1.4rem;
+      margin: 0 0 0.3rem;
+      text-align: center;
+      background: linear-gradient(135deg, #F2619C, #93ABD9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+
+    .login-box .subtitle {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .login-box label {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #444;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      margin-top: 0.4rem;
+      border: 2px solid #E7BEF8;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.8);
+      outline: none;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+    }
+
+    .login-box input:focus {
+      border-color: #F2619C;
+      box-shadow: 0 0 0 4px rgba(242, 97, 156, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .login-box button {
+      width: 100%;
+      margin-top: 1.8rem;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, #F2619C, #E7BEF8);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 8px 20px rgba(242, 97, 156, 0.35);
+      transition: all 0.25s ease;
+    }
+
+    .login-box button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(242, 97, 156, 0.45);
+      background: linear-gradient(135deg, #EDE986, #F2619C);
+    }
+
+    .login-box button:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="login-box">
+    <div class="icon">📚</div>
+    <h1>Perpustakaan Digital</h1>
+    <p class="subtitle">Masuk untuk mengakses koleksi buku</p>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Masukkan username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Masukkan password" required>
+
+      <button type="submit">Masuk</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      console.log("Login attempt:", { username, password });
+      alert("Login berhasil (dummy) untuk: " + username);
+    });
+  </script>
+</body>
+</html>
