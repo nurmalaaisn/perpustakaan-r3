@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,16 +45,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             padding: 1rem 6%;
-
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-
             border-bottom: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-
             position: sticky;
             top: 0;
             z-index: 10;
@@ -64,16 +61,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-
             font-size: 1.4rem;
             font-weight: 800;
-
             background: linear-gradient(
                 135deg,
                 #F2619C,
                 #93ABD9
             );
-
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -88,28 +82,21 @@
 
         nav a {
             position: relative;
-
             text-decoration: none;
             color: #444;
-
             font-weight: 600;
             font-size: 0.95rem;
-
             transition: color 0.25s ease;
         }
 
         nav a::after {
             content: "";
-
             position: absolute;
             left: 0;
             bottom: -6px;
-
             width: 0;
             height: 2px;
-
             background: #F2619C;
-
             transition: width 0.25s ease;
         }
 
@@ -138,7 +125,6 @@
 <body>
 
     <header>
-
         <div class="logo">
             📚 Perpustakaan R3
         </div>
@@ -148,8 +134,8 @@
             <a href="books.html">Books</a>
             <a href="login.html">Login</a>
         </nav>
-
     </header>
 
 </body>
+
 </html>
