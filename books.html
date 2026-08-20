@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rak Buku — Perpustakaan Bunga Padang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose: #F2619C;
+    --rose-deep: #d63f7d;
+    --lilac: #E7BEF8;
+    --lilac-deep: #b988d6;
+    --blueberry: #93ABD9;
+    --blueberry-deep: #5f7bb3;
+    --lemon: #EDE986;
+    --lemon-deep: #c9c34a;
+    --sky-top: #4f7fb0;
+    --sky-bottom: #cfe3f5;
+    --ink: #2c2440;
+    --cream: #fffaf3;
+    --paper: #fffdf9;
+    --radius: 22px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Poppins', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    min-height:100vh;
+  }
+
+  h1,h2,h3,.brand,.pill,.btn,.stat-num{
+    font-family:'Baloo 2', sans-serif;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--sky-top) 0%, #7fa6c9 38%, var(--sky-bottom) 78%, var(--cream) 100%);
+    padding-bottom:70px;
+  }
+
+  .hero::before, .hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:130px;
+    background:#3f8a4c;
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    opacity:.55;
+  }
+  .hero::before{ transform:scaleX(1.3) translateY(30px); background:#4d9a58; opacity:.5;}
+  .hero::after{ transform:scaleX(1.6) translateY(55px); background:#3a7d47; opacity:.65;}
+
+  nav{
+    position:relative;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:26px 6vw 0;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:800;
+    font-size:1.35rem;
+    color:#fff;
+    text-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  .brand .leaf{
+    width:34px; height:34px;
+    background:var(--lemon);
+    border-radius:60% 40% 55% 45% / 45% 55% 45% 55%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+    box-shadow:0 3px 8px rgba(0,0,0,.2);
+  }
+
+  .nav-links{
+    display:flex;
+    gap:6px;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(6px);
+    padding:6px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.35);
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+    font-size:.88rem;
+    padding:8px 16px;
+    border-radius:999px;
+    transition:background .2s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ background:rgba(255,255,255,.28); }
+  .nav-links a.active{ background:#fff; color:var(--rose-deep); }
+
+  .hero-content{
+    position:relative;
+    z-index:5;
+    max-width:760px;
+    margin:52px auto 0;
+    text-align:center;
+    padding:0 6vw;
+  }
+  .hero-content .eyebrow{
+    display:inline-block;
+    background:var(--rose);
+    color:#fff;
+    font-weight:600;
+    font-size:.78rem;
+    letter-spacing:.04em;
+    padding:7px 16px;
+    border-radius:999px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    margin-bottom:18px;
+  }
+  .hero-content h1{
+    color:#fff;
+    font-size:clamp(2.1rem, 5vw, 3.3rem);
+    font-weight:800;
+    line-height:1.15;
+    text-shadow:0 3px 14px rgba(0,0,0,.18);
+  }
+  .hero-content h1 span{ color:var(--lemon); }
+  .hero-content p{
+    color:#f2f6fb;
+    margin-top:14px;
+    font-size:1rem;
+    line-height:1.6;
+  }
+
+  /* search + filter */
+  .search-wrap{
+    position:relative;
+    z-index:6;
+    max-width:620px;
+    margin:30px auto 0;
+    display:flex;
+    background:#fff;
+    border-radius:999px;
+    padding:6px;
+    box-shadow:0 14px 30px rgba(40,30,60,.22);
+    gap:6px;
+  }
+  .search-wrap input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    padding:12px 18px;
+    font-family:'Poppins',sans-serif;
+    font-size:.95rem;
+    color:var(--ink);
+  }
+  .search-wrap input::placeholder{ color:#b7aec9; }
+  .search-wrap button{
+    border:none;
+    cursor:pointer;
+    background:var(--rose);
+    color:#fff;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:.92rem;
+    padding:0 26px;
+    border-radius:999px;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .search-wrap button:hover{ background:var(--rose-deep); transform:translateY(-1px); }
+
+  .filters{
+    position:relative;
+    z-index:6;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    max-width:700px;
+    margin:22px auto 0;
+    padding:0 6vw;
+  }
+  .pill{
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    font-size:.85rem;
+    padding:9px 18px;
+    border-radius:999px;
+    color:var(--ink);
+    background:rgba(255,255,255,.85);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .pill:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.12); }
+  .pill.is-active{ background:var(--lemon); color:#5a4b1a; box-shadow:0 6px 14px rgba(0,0,0,.15); }
+
+  /* ---------- STATS ---------- */
+  .stats{
+    max-width:1080px;
+    margin:-34px auto 50px;
+    padding:0 6vw;
+    position:relative;
+    z-index:6;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  .stat-card{
+    background:var(--paper);
+    border-radius:18px;
+    padding:16px 14px;
+    text-align:center;
+    box-shadow:0 10px 24px rgba(60,40,90,.08);
+    border:1px solid rgba(0,0,0,.04);
+  }
+  .stat-num{ font-size:1.5rem; font-weight:800; color:var(--rose-deep); }
+  .stat-label{ font-size:.72rem; color:#7a7188; margin-top:2px; }
+
+  /* ---------- CATALOG ---------- */
+  .catalog{
+    max-width:1180px;
+    margin:0 auto;
+    padding:10px 6vw 90px;
+  }
+  .catalog-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:26px;
+  }
+  .catalog-head h2{
+    font-size:1.6rem;
+    font-weight:800;
+    color:var(--ink);
+  }
+  .catalog-head p{ color:#7a7188; font-size:.88rem; margin-top:4px; }
+  .sort{
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--rose-deep);
+    display:flex; align-items:center; gap:6px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:22px;
+  }
+
+  .book-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 10px 26px rgba(60,40,90,.09);
+    border:1px solid rgba(0,0,0,.04);
+    display:flex;
+    flex-direction:column;
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .book-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 34px rgba(60,40,90,.16);
+  }
+
+  .cover{
+    position:relative;
+    height:150px;
+    display:flex;
+    align-items:flex-end;
+    padding:14px;
+    color:#fff;
+  }
+  .cover .status{
+    position:absolute;
+    top:12px; right:12px;
+    font-size:.68rem;
+    font-weight:700;
+    background:rgba(255,255,255,.9);
+    padding:4px 10px;
+    border-radius:999px;
+  }
+  .cover .status.tersedia{ color:#2a7a44; }
+  .cover .status.dipinjam{ color:#b3401a; }
+
+  .cover .spine{
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:14px;
+    background:rgba(0,0,0,.14);
+  }
+  .cover .glyph{
+    position:absolute;
+    right:14px; top:14px;
+    font-size:1.6rem;
+    opacity:.85;
+  }
+  .cover h3{
+    font-size:1.05rem;
+    font-weight:700;
+    line-height:1.25;
+    text-shadow:0 2px 8px rgba(0,0,0,.15);
+  }
+
+  .card-body{
+    padding:14px 16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex:1;
+  }
+  .card-body .author{
+    font-size:.82rem;
+    color:#8b8299;
+    font-weight:500;
+  }
+  .card-body .genre{
+    display:inline-block;
+    align-self:flex-start;
+    font-size:.7rem;
+    font-weight:700;
+    padding:4px 10px;
+    border-radius:999px;
+    background:#f3eefb;
+    color:var(--lilac-deep);
+  }
+  .meta{
+    margin-top:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:.76rem;
+    color:#a49aae;
+  }
+  .meta .rack{ font-weight:600; color:#7a7188; }
+  .meta .stars{ color:var(--rose); letter-spacing:1px; }
+
+  .btn-pinjam{
+    margin-top:6px;
+    width:100%;
+    border:none;
+    cursor:pointer;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    padding:10px;
+    border-radius:12px;
+    background:var(--ink);
+    color:#fff;
+    transition:background .2s ease;
+  }
+  .btn-pinjam:hover{ background:var(--rose-deep); }
+  .btn-pinjam[disabled]{
+    background:#e6e0ee;
+    color:#a79ebb;
+    cursor:not-allowed;
+  }
+
+  /* pagination */
+  .pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-top:44px;
+  }
+  .pagination button{
+    border:none;
+    cursor:pointer;
+    width:38px; height:38px;
+    border-radius:50%;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    background:#fff;
+    color:var(--ink);
+    box-shadow:0 4px 10px rgba(60,40,90,.1);
+  }
+  .pagination button.is-active{ background:var(--rose); color:#fff; }
+
+  footer{
+    background:var(--ink);
+    color:#cfc7dd;
+    text-align:center;
+    padding:34px 6vw;
+    font-size:.82rem;
+  }
+  footer strong{ color:#fff; }
+
+  @media (max-width:720px){
+    .stats{ grid-template-columns:repeat(2,1fr); }
+    .nav-links{ order:3; width:100%; justify-content:center; }
+  }
+
+  :focus-visible{ outline:3px solid var(--blueberry-deep); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <nav>
+    <div class="brand"><span class="leaf">📖</span> Perpustakaan&nbsp;Padang&nbsp;Bunga</div>
+    <div class="nav-links">
+      <a href="#" class="active">Rak Buku</a>
+      <a href="#">Kategori</a>
+      <a href="#">Peminjaman Saya</a>
+      <a href="#">Masuk</a>
+    </div>
+  </nav>
+
+  <div class="hero-content">
+    <span class="eyebrow">🌷 Koleksi baru tiap minggu</span>
+    <h1>Temukan buku favoritmu di <span>rak yang paling ceria</span></h1>
+    <p>Jelajahi ribuan judul dari fiksi, sains, hingga komik — tersusun rapi seperti taman bunga di musim semi.</p>
+  </div>
+
+  <form class="search-wrap" role="search" onsubmit="return false;">
+    <input type="text" placeholder="Cari judul, penulis, atau ISBN…" aria-label="Cari buku">
+    <button type="submit">Cari</button>
+  </form>
+
+  <div class="filters">
+    <button class="pill is-active">Semua</button>
+    <button class="pill">Fiksi</button>
+    <button class="pill">Non-Fiksi</button>
+    <button class="pill">Sains</button>
+    <button class="pill">Sejarah</button>
+    <button class="pill">Komik</button>
+    <button class="pill">Anak</button>
+  </div>
+</header>
+
+<section class="stats">
+  <div class="stat-card"><div class="stat-num">4.812</div><div class="stat-label">Total judul</div></div>
+  <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Kategori</div></div>
+  <div class="stat-card"><div class="stat-num">312</div><div class="stat-label">Sedang dipinjam</div></div>
+  <div class="stat-card"><div class="stat-num">98%</div><div class="stat-label">Tersedia hari ini</div></div>
+</section>
+
+<main class="catalog">
+  <div class="catalog-head">
+    <div>
+      <h2>Semua Buku</h2>
+      <p>Menampilkan 8 dari 4.812 judul</p>
+    </div>
+    <div class="sort">⇅ Urutkan: Terbaru</div>
+  </div>
+
+  <div class="grid">
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--rose),var(--rose-deep));">
+        <span class="spine"></span>
+        <span class="glyph">🌹</span>
+        <h3>Musim Semi di Rak Ke-7</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Aisyah Nurmala</span>
+        <span class="genre">Fiksi</span>
+        <div class="meta"><span class="rack">Rak A-12</span><span class="stars">★★★★★</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--lilac),var(--lilac-deep)); color:#3d2c55;">
+        <span class="spine" style="background:rgba(0,0,0,.10);"></span>
+        <span class="glyph">🔭</span>
+        <h3>Bintang di Atas Bukit</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Raka Wibisana</span>
+        <span class="genre">Sains</span>
+        <div class="meta"><span class="rack">Rak C-04</span><span class="stars">★★★★☆</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--blueberry),var(--blueberry-deep));">
+        <span class="spine"></span>
+        <span class="glyph">🫐</span>
+        <h3>Jejak Biru Danau Toba</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Melati Simanjuntak</span>
+        <span class="genre">Sejarah</span>
+        <div class="meta"><span class="rack">Rak D-21</span><span class="stars">★★★★★</span></div>
+        <button class="btn-pinjam" disabled>Sedang Dipinjam</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--lemon),var(--lemon-deep)); color:#5a4b1a;">
+        <span class="spine" style="background:rgba(0,0,0,.10);"></span>
+        <span class="glyph">🍋</span>
+        <h3>Resep Bahagia Sederhana</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Dian Kartika</span>
+        <span class="genre">Non-Fiksi</span>
+        <div class="meta"><span class="rack">Rak B-09</span><span class="stars">★★★★★</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--rose-deep),var(--lilac-deep));">
+        <span class="spine"></span>
+        <span class="glyph">🦸</span>
+        <h3>Penjaga Kota Kertas</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Bagas Prakoso</span>
+        <span class="genre">Komik</span>
+        <div class="meta"><span class="rack">Rak F-02</span><span class="stars">★★★★☆</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--blueberry-deep),var(--rose));">
+        <span class="spine"></span>
+        <span class="glyph">🐇</span>
+        <h3>Kelinci Kecil dan Hujan</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Nadia Putri</span>
+        <span class="genre">Anak</span>
+        <div class="meta"><span class="rack">Rak E-15</span><span class="stars">★★★★★</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--lilac-deep),var(--blueberry));">
+        <span class="spine"></span>
+        <span class="glyph">🧪</span>
+        <h3>Laboratorium Ide Gila</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Fajar Ramadhan</span>
+        <span class="genre">Sains</span>
+        <div class="meta"><span class="rack">Rak C-18</span><span class="stars">★★★☆☆</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+    <article class="book-card">
+      <div class="cover" style="background:linear-gradient(135deg,var(--lemon-deep),var(--rose));">
+        <span class="spine"></span>
+        <span class="glyph">🗺️</span>
+        <h3>Peta Tua dari Timur</h3>
+      </div>
+      <div class="card-body">
+        <span class="author">oleh Sri Wulandari</span>
+        <span class="genre">Sejarah</span>
+        <div class="meta"><span class="rack">Rak D-07</span><span class="stars">★★★★☆</span></div>
+        <button class="btn-pinjam">Pinjam Buku</button>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="pagination">
+    <button aria-label="Halaman sebelumnya">‹</button>
+    <button class="is-active">1</button>
+    <button>2</button>
+    <button>3</button>
+    <button aria-label="Halaman berikutnya">›</button>
+  </div>
+</main>
+
+<footer>
+  <strong>Perpustakaan Padang Bunga</strong> — tempat setiap buku menemukan pembacanya.<br>
+  Buka Senin–Sabtu, 08.00–20.00
+</footer>
+
+<script>
+  // filter pill toggle (visual only)
+  document.querySelectorAll('.filters .pill').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.filters .pill').forEach(b=>b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+    });
+  });
+  // pagination toggle (visual only)
+  document.querySelectorAll('.pagination button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(!isNaN(parseInt(btn.textContent))){
+        document.querySelectorAll('.pagination button').forEach(b=>b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
