@@ -1,20 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Library</title>
+    <title>Perpustakaan R3</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #F2619C 0%,
+                #E7BEF8 40%,
+                #93ABD9 75%,
+                #EDE986 100%
+            );
+            background-size: 300% 300%;
+            animation: gradientMove 12s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 1rem 6%;
+
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* LOGO */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            font-size: 1.4rem;
+            font-weight: 800;
+
+            background: linear-gradient(
+                135deg,
+                #F2619C,
+                #93ABD9
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* NAVIGATION */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            position: relative;
+
+            text-decoration: none;
+            color: #444;
+
+            font-weight: 600;
+            font-size: 0.95rem;
+
+            transition: color 0.25s ease;
+        }
+
+        nav a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+
+            width: 0;
+            height: 2px;
+
+            background: #F2619C;
+
+            transition: width 0.25s ease;
+        }
+
+        nav a:hover {
+            color: #F2619C;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
     <header>
-        <h1>📚 Perpustakaan R3</h1>
+
+        <div class="logo">
+            📚 Perpustakaan R3
+        </div>
 
         <nav>
             <a href="index.html">Home</a>
             <a href="books.html">Books</a>
             <a href="login.html">Login</a>
         </nav>
+
     </header>
 
 </body>
